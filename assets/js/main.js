@@ -31,28 +31,31 @@
     if (document.activeElement && document.activeElement.closest('.subnav')) document.activeElement.blur();
   });
 
-  // Design picker: switch the look without reloading, and remember the choice
-  var designLinks = document.querySelectorAll('a[data-design]');
-  function markDesign() {
-    var current = document.documentElement.getAttribute('data-design') || 'classic';
-    designLinks.forEach(function (a) {
-      a.classList.toggle('is-current', a.getAttribute('data-design') === current);
+  // Design picker: switch layout and colour scheme without reloading, and remember the choice
+  var root = document.documentElement;
+  var defaults = { design: 'classic', layout: 'standard' };
+  var pickerLinks = document.querySelectorAll('a[data-set]');
+  function currentValue(set) { return root.getAttribute('data-' + set) || defaults[set]; }
+  function markPicker() {
+    pickerLinks.forEach(function (a) {
+      a.classList.toggle('is-current', a.getAttribute('data-value') === currentValue(a.getAttribute('data-set')));
     });
   }
-  designLinks.forEach(function (a) {
+  pickerLinks.forEach(function (a) {
     a.addEventListener('click', function (e) {
       e.preventDefault();
-      var d = a.getAttribute('data-design');
-      if (d === 'classic') document.documentElement.removeAttribute('data-design');
-      else document.documentElement.setAttribute('data-design', d);
+      var set = a.getAttribute('data-set');
+      var value = a.getAttribute('data-value');
+      if (value === defaults[set]) root.removeAttribute('data-' + set);
+      else root.setAttribute('data-' + set, value);
       try {
-        localStorage.setItem('design', d);
-        history.replaceState(null, '', '?design=' + d + location.hash);
+        localStorage.setItem(set, value);
+        history.replaceState(null, '', '?layout=' + currentValue('layout') + '&design=' + currentValue('design') + location.hash);
       } catch (err) {}
-      markDesign();
+      markPicker();
     });
   });
-  markDesign();
+  markPicker();
 
   // Hero video: skip it for visitors who prefer reduced motion or save data
   var video = document.querySelector('.hero-media[data-src]');

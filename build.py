@@ -79,6 +79,17 @@ DESIGNS = [
     ('soft', 'רך – מעוגל', 'Soft – rounded', '#4f46e5', '#f3f4fc'),
 ]
 
+# Alternative page layouts offered in the same menu: (id, Hebrew name, English name).
+# Each is defined in assets/css/layouts.css and can be combined with any colour scheme.
+LAYOUTS = [
+    ('standard', 'רגיל (נוכחי)', 'Standard (current)'),
+    ('centered', 'ממורכז', 'Centered'),
+    ('split', 'מפוצל – טקסט לצד וידאו', 'Split – text beside video'),
+    ('sidebar', 'תפריט צד', 'Side menu'),
+    ('showcase', 'תצוגה – תמונות גדולות', 'Showcase – large photos'),
+    ('compact', 'קומפקטי – רשימה', 'Compact – list'),
+]
+
 # ---------------------------------------------------------------- text
 T = {
     'he': dict(
@@ -87,7 +98,7 @@ T = {
         address='הצורף 1, נוף-הגליל', phone_office='04-6020505', phone_sales='050-4728956',
         skip='דלג לתוכן', home='דף הבית', nav_label='ניווט ראשי', menu='תפריט', crumbs_label='מיקום באתר',
         brand_home='ר.א.י – דף הבית', call='התקשרו',
-        nav_precast='מבנים טרומיים', nav_about='אודות', nav_designs='עיצובים', designs_note='תצוגה מקדימה של עיצובים חלופיים', about_short='אודות ר.א.י',
+        nav_precast='מבנים טרומיים', nav_about='אודות', nav_designs='עיצובים', designs_layout='תבנית', designs_colors='ערכת צבעים', about_short='אודות ר.א.י',
         footer_tagline='מבנים ואלמנטים טרומיים יבילים ועבודות בניה.',
         footer_activity='תחומי פעילות', footer_company='החברה', rights='כל הזכויות שמורות © 2026',
         office='משרד', sales='מכירות', email='אימייל', address_label='כתובת',
@@ -135,7 +146,7 @@ T = {
         address='HaTsoref St 1, Nof HaGalil, Israel', phone_office='+972-4-602-0505', phone_sales='+972-50-472-8956',
         skip='Skip to content', home='Home', nav_label='Main navigation', menu='Menu', crumbs_label='Breadcrumb',
         brand_home='R.A.Y. – Home', call='Call',
-        nav_precast='Precast Structures', nav_about='About', nav_designs='Designs', designs_note='Preview of alternative designs', about_short='About R.A.Y.',
+        nav_precast='Precast Structures', nav_about='About', nav_designs='Designs', designs_layout='Layout', designs_colors='Colour scheme', about_short='About R.A.Y.',
         footer_tagline='Portable precast structures and elements, and construction works.',
         footer_activity='What we do', footer_company='Company', rights='All rights reserved © 2026',
         office='Office', sales='Sales', email='Email', address_label='Address',
@@ -452,20 +463,26 @@ def nav(c):
 
 
 def designs_menu(c):
-    """Temporary menu for previewing alternative designs (see themes.css)."""
+    """Temporary menu for previewing alternative layouts (layouts.css) and colour schemes (themes.css)."""
     t = c.t
     idx = 1 + LANGS.index(c.lang)
-    items = ''.join(
-        f'<li><a href="?design={d[0]}" data-design="{d[0]}"><span class="swatch" style="--a:{d[3]};--b:{d[4]}"></span>{d[idx]}</a></li>'
-        for d in DESIGNS)
+    layouts = ''.join(
+        f'<li><a href="?layout={d[0]}" data-set="layout" data-value="{d[0]}">{d[idx]}</a></li>' for d in LAYOUTS)
+    colors = ''.join(
+        f'<li><a href="?design={d[0]}" data-set="design" data-value="{d[0]}">'
+        f'<span class="swatch" style="--a:{d[3]};--b:{d[4]}"></span>{d[idx]}</a></li>' for d in DESIGNS)
     return (f'<li><button type="button" class="nav-parent" aria-expanded="false">{t["nav_designs"]}{icon("chevron")}</button>'
-            f'<ul class="subnav designs"><li class="designs-note">{t["designs_note"]}</li>{items}</ul></li>')
+            f'<div class="subnav designs">'
+            f'<div><span class="designs-title">{t["designs_layout"]}</span><ul>{layouts}</ul></div>'
+            f'<div><span class="designs-title">{t["designs_colors"]}</span><ul>{colors}</ul></div>'
+            f'</div></li>')
 
 
-# Applies the chosen design before the page paints (from ?design=... or the last choice).
-DESIGN_SCRIPT = ("<script>(function(){try{var m=location.search.match(/[?&]design=([a-z]+)/),"
-                 "d=m?m[1]:localStorage.getItem('design');if(m)localStorage.setItem('design',d);"
-                 "if(d&&d!=='classic')document.documentElement.setAttribute('data-design',d)}catch(e){}})();</script>")
+# Applies the chosen layout and colour scheme before the page paints (from the URL or the last choice).
+DESIGN_SCRIPT = ("<script>(function(){try{var h=document.documentElement,k=['design','layout'],i,m,v;"
+                 "for(i=0;i<2;i++){m=location.search.match(new RegExp('[?&]'+k[i]+'=([a-z]+)'));"
+                 "v=m?m[1]:localStorage.getItem(k[i]);if(m)localStorage.setItem(k[i],v);"
+                 "if(v&&v!=='classic'&&v!=='standard')h.setAttribute('data-'+k[i],v)}}catch(e){}})();</script>")
 
 
 def layout(c, description, main, cta=True):
@@ -499,6 +516,7 @@ def layout(c, description, main, cta=True):
 <link rel="preload" href="{c.asset('fonts/heebo-' + ('hebrew' if c.lang == 'he' else 'latin') + '.woff2')}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{c.asset('css/style.css')}">
 <link rel="stylesheet" href="{c.asset('css/themes.css')}">
+<link rel="stylesheet" href="{c.asset('css/layouts.css')}">
 {DESIGN_SCRIPT}
 </head>
 <body>

@@ -8,7 +8,18 @@ The original WordPress/Elementor snapshot is preserved in git history (first com
 
 ## Design alternatives
 
-The "Designs" menu in the site header switches between these looks (the choice is remembered while browsing):
+The "Designs" menu in the site header previews two independent choices, which can be combined freely (the choice is remembered while browsing):
+
+**Layout**
+
+- [Standard (current)](https://ymac344.github.io/rayforms/?layout=standard)
+- [Centered](https://ymac344.github.io/rayforms/?layout=centered)
+- [Split – text beside video](https://ymac344.github.io/rayforms/?layout=split)
+- [Side menu](https://ymac344.github.io/rayforms/?layout=sidebar)
+- [Showcase – large photos](https://ymac344.github.io/rayforms/?layout=showcase)
+- [Compact – list](https://ymac344.github.io/rayforms/?layout=compact)
+
+**Colour scheme**
 
 - [Classic (current)](https://ymac344.github.io/rayforms/?design=classic)
 - [Graphite – dark](https://ymac344.github.io/rayforms/?design=graphite)
@@ -20,14 +31,16 @@ The "Designs" menu in the site header switches between these looks (the choice i
 - [Steel – teal](https://ymac344.github.io/rayforms/?design=steel)
 - [Soft – rounded](https://ymac344.github.io/rayforms/?design=soft)
 
-Each design is a block of settings in `assets/css/themes.css`. Once one is chosen, the menu and the unused designs can be removed.
+A link can set both, for example [https://ymac344.github.io/rayforms/?layout=split&design=galilee](https://ymac344.github.io/rayforms/?layout=split&design=galilee).
+
+Layouts are defined in `assets/css/layouts.css` and colour schemes in `assets/css/themes.css`. Once a combination is chosen, the menu and the unused options can be removed.
 
 ## Structure
 
 - `build.py` – all page content in Hebrew and English, and the shared layout (header, navigation, footer). Generates every `index.html`: Hebrew pages at the root, English pages under `en/`.
 - `assets/css/style.css` – the design (colors, typography, layout).
 - `assets/js/main.js` – mobile menu, image lightbox, hero video, contact form.
-- `assets/img`, `assets/video`, `assets/fonts` – media and the Heebo font.
+- `assets/img`, `assets/video`, `assets/fonts` – media and fonts. `logo.svg` is the Hebrew logo, `logo-en.svg` the English one.
 
 ## Editing
 

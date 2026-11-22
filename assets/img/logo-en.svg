@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 695.2 365" fill="#DD313F">
+<!-- English version of the logo: mirrored block layout, "R.A.Y." reading left to right -->
+<defs><clipPath id="caps"><rect x="0" y="19.4" width="695.2" height="118.7"/></clipPath></defs>
+<g>
+<rect x="2.4" y="194.6" width="213.7" height="166.2"/>
+<rect x="240.7" y="194.6" width="213.7" height="166.2"/>
+<rect x="477.5" y="194.6" width="213.7" height="166.2"/>
+<rect x="2.3" y="4.2" width="96.4" height="71.9"/>
+<rect x="120.7" y="4.2" width="96.4" height="71.9"/>
+<rect x="2.3" y="99.4" width="96.4" height="71.9"/>
+<rect x="120.7" y="99.4" width="96.4" height="71.9"/>
+</g>
+<g clip-path="url(#caps)" fill="none" stroke="#DD313F" stroke-width="32" stroke-linejoin="round">
+<path d="M281 150V35.4H312a22 22 0 0 1 0 44H281M304 79.4 336 150"/>
+<path d="M407 150 451 30 495 150"/>
+<path d="M428 108H474" stroke-width="22"/>
+<path d="M566 10 598 82 630 10M598 80V150"/>
+</g>
+<g>
+<rect x="358" y="90" width="29" height="48.1" rx="7"/>
+<rect x="516" y="90" width="29" height="48.1" rx="7"/>
+<rect x="651" y="90" width="29" height="48.1" rx="7"/>
+</g>
+</svg>
