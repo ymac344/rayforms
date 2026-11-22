@@ -1,0 +1,77 @@
+(function () {
+  'use strict';
+
+  // Mobile menu
+  var toggle = document.querySelector('.menu-toggle');
+  var nav = document.getElementById('nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+  }
+
+  // Dropdowns: open on click/tap as well as hover
+  document.querySelectorAll('.nav-parent').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var li = btn.parentElement;
+      var open = li.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll('.nav li.open').forEach(function (li) { li.classList.remove('open'); });
+    if (document.activeElement && document.activeElement.closest('.subnav')) document.activeElement.blur();
+  });
+
+  // Hero video: skip it for visitors who prefer reduced motion or save data
+  var video = document.querySelector('.hero-media[data-src]');
+  if (video) {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var saveData = navigator.connection && navigator.connection.saveData;
+    if (!reduce && !saveData) {
+      video.src = video.getAttribute('data-src');
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
+    }
+  }
+
+  // Image lightbox
+  var links = document.querySelectorAll('[data-lightbox]');
+  if (links.length && window.HTMLDialogElement) {
+    var dialog = document.createElement('dialog');
+    dialog.className = 'lightbox';
+    dialog.innerHTML = '<button type="button" aria-label="סגירה">&times;</button><img alt="">';
+    document.body.appendChild(dialog);
+    var img = dialog.querySelector('img');
+    dialog.addEventListener('click', function (e) { if (e.target !== img) dialog.close(); });
+    links.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        img.src = a.href;
+        img.alt = (a.querySelector('img') || {}).alt || '';
+        dialog.showModal();
+      });
+    });
+  }
+
+  // Contact form: opens the visitor's email app with the details filled in
+  document.querySelectorAll('form[data-mailto]').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var d = new FormData(form);
+      var lines = [
+        'שם: ' + (d.get('name') || ''),
+        'טלפון: ' + (d.get('phone') || '')
+      ];
+      if (d.get('email')) lines.push('אימייל: ' + d.get('email'));
+      lines.push('', d.get('message') || '');
+      var subject = 'פנייה מהאתר – ' + (d.get('name') || '');
+      window.location.href = 'mailto:' + form.getAttribute('data-mailto') +
+        '?subject=' + encodeURIComponent(subject) +
+        '&body=' + encodeURIComponent(lines.join('\n'));
+    });
+  });
+})();

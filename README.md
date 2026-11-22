@@ -1,8 +1,25 @@
 # rayforms
 
-Static snapshot of https://rayforms.co.il/ (WordPress + Elementor), captured 2026-11-22 as the baseline for a site revamp.
+Redesigned static website for ר.א.י (תעשיה לתבניות מתקדמות) בע"מ, based on the content of https://rayforms.co.il/.
 
-- 18 pages, with links rewritten to relative paths so the site can be browsed locally:
-  `python3 -m http.server` then open http://localhost:8000/
-- `wp-content/` and `wp-includes/` hold the downloaded CSS, JS, fonts, images and the hero video.
-- Dynamic features (contact form submission, reCAPTCHA, Google Maps embed) still point at the live site / third parties.
+The original WordPress/Elementor snapshot is preserved in git history (first commit).
+
+## Structure
+
+- `build.py` – all page content and the shared layout (header, navigation, footer). Generates every `index.html`.
+- `assets/css/style.css` – the design (colors, typography, layout).
+- `assets/js/main.js` – mobile menu, image lightbox, hero video, contact form.
+- `assets/img`, `assets/video`, `assets/fonts` – media and the Heebo font.
+
+## Editing
+
+Change text or pages in `build.py`, then rebuild:
+
+    python3 build.py
+
+Preview locally with `python3 -m http.server` and open http://localhost:8000/.
+
+## Notes
+
+- The contact form has no server behind it: submitting opens the visitor's email app with the message addressed to the company.
+- Page addresses are the same as on the original site.
