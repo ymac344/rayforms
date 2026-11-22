@@ -63,7 +63,8 @@
     display: none; position: static; opacity: 1; visibility: visible; transform: none;
     min-width: 0; padding: 0 0 8px; padding-inline-start: 10px; border: 0; box-shadow: none; background: none;
   }
-  [data-layout="sidebar"] .nav li.open > .subnav, [data-layout="sidebar"] .nav li:has(> .nav-parent.is-active) > .subnav { display: block; }
+  [data-layout="sidebar"] .nav > ul > li.open > .subnav,
+  [data-layout="sidebar"] .nav > ul > li:has(> .nav-parent.is-active) > .subnav { display: block; }
   [data-layout="sidebar"] .subnav a { padding: 7px 10px; font-size: .93rem; color: var(--header-ink); }
   [data-layout="sidebar"] .subnav a:hover { background: none; color: var(--accent-text); }
   [data-layout="sidebar"] .designs-title, [data-layout="sidebar"] .designs-note { color: var(--header-ink); }
@@ -100,6 +101,7 @@
 
 /* ============ 5. Compact – narrow page, no video, list-style cards ============ */
 [data-layout="compact"] { --wrap: 920px; --section: clamp(40px, 5vw, 60px); }
+[data-layout="compact"] .site-header .wrap, [data-layout="compact"] .site-footer .wrap { max-width: calc(1160px + 2 * var(--gutter)); }
 [data-layout="compact"] .hero-media, [data-layout="compact"] .hero::after { display: none; }
 [data-layout="compact"] .hero .wrap { padding-block: clamp(48px, 7vw, 84px); }
 [data-layout="compact"] .hero h1 { font-size: clamp(1.8rem, 3.6vw, 2.5rem); }

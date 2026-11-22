@@ -25,6 +25,16 @@
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
   });
+  // Clicking anywhere outside an opened dropdown closes it
+  document.addEventListener('click', function (e) {
+    document.querySelectorAll('.nav li.open').forEach(function (li) {
+      if (!li.contains(e.target)) {
+        li.classList.remove('open');
+        var b = li.querySelector('.nav-parent');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
     document.querySelectorAll('.nav li.open').forEach(function (li) { li.classList.remove('open'); });
