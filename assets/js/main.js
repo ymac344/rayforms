@@ -1,6 +1,11 @@
 (function () {
   'use strict';
 
+  var en = document.documentElement.lang === 'en';
+  var text = en
+    ? { close: 'Close', name: 'Name', phone: 'Phone', email: 'Email', subject: 'Website inquiry' }
+    : { close: 'סגירה', name: 'שם', phone: 'טלפון', email: 'אימייל', subject: 'פנייה מהאתר' };
+
   // Mobile menu
   var toggle = document.querySelector('.menu-toggle');
   var nav = document.getElementById('nav');
@@ -43,7 +48,7 @@
   if (links.length && window.HTMLDialogElement) {
     var dialog = document.createElement('dialog');
     dialog.className = 'lightbox';
-    dialog.innerHTML = '<button type="button" aria-label="סגירה">&times;</button><img alt="">';
+    dialog.innerHTML = '<button type="button" aria-label="' + text.close + '">&times;</button><img alt="">';
     document.body.appendChild(dialog);
     var img = dialog.querySelector('img');
     dialog.addEventListener('click', function (e) { if (e.target !== img) dialog.close(); });
@@ -63,12 +68,12 @@
       e.preventDefault();
       var d = new FormData(form);
       var lines = [
-        'שם: ' + (d.get('name') || ''),
-        'טלפון: ' + (d.get('phone') || '')
+        text.name + ': ' + (d.get('name') || ''),
+        text.phone + ': ' + (d.get('phone') || '')
       ];
-      if (d.get('email')) lines.push('אימייל: ' + d.get('email'));
+      if (d.get('email')) lines.push(text.email + ': ' + d.get('email'));
       lines.push('', d.get('message') || '');
-      var subject = 'פנייה מהאתר – ' + (d.get('name') || '');
+      var subject = text.subject + ' – ' + (d.get('name') || '');
       window.location.href = 'mailto:' + form.getAttribute('data-mailto') +
         '?subject=' + encodeURIComponent(subject) +
         '&body=' + encodeURIComponent(lines.join('\n'));
