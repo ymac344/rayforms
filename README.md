@@ -2,6 +2,8 @@
 
 Redesigned static website for ר.א.י (תעשיה לתבניות מתקדמות) בע"מ, based on the content of https://rayforms.co.il/.
 
+**View the site:** https://ymac344.github.io/rayforms/
+
 The original WordPress/Elementor snapshot is preserved in git history (first commit).
 
 ## Structure
