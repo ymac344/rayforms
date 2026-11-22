@@ -31,6 +31,29 @@
     if (document.activeElement && document.activeElement.closest('.subnav')) document.activeElement.blur();
   });
 
+  // Design picker: switch the look without reloading, and remember the choice
+  var designLinks = document.querySelectorAll('a[data-design]');
+  function markDesign() {
+    var current = document.documentElement.getAttribute('data-design') || 'classic';
+    designLinks.forEach(function (a) {
+      a.classList.toggle('is-current', a.getAttribute('data-design') === current);
+    });
+  }
+  designLinks.forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var d = a.getAttribute('data-design');
+      if (d === 'classic') document.documentElement.removeAttribute('data-design');
+      else document.documentElement.setAttribute('data-design', d);
+      try {
+        localStorage.setItem('design', d);
+        history.replaceState(null, '', '?design=' + d + location.hash);
+      } catch (err) {}
+      markDesign();
+    });
+  });
+  markDesign();
+
   // Hero video: skip it for visitors who prefer reduced motion or save data
   var video = document.querySelector('.hero-media[data-src]');
   if (video) {

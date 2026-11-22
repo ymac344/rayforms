@@ -15,11 +15,13 @@
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="../assets/fonts/heebo-hebrew.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/themes.css">
+<script>(function(){try{var m=location.search.match(/[?&]design=([a-z]+)/),d=m?m[1]:localStorage.getItem('design');if(m)localStorage.setItem('design',d);if(d&&d!=='classic')document.documentElement.setAttribute('data-design',d)}catch(e){}})();</script>
 </head>
 <body>
 <a class="skip" href="#content">דלג לתוכן</a>
 <header class="site-header"><div class="wrap">
-<a class="brand" href="../" aria-label="ר.א.י – דף הבית"><img src="../assets/img/logo.svg" alt="ר.א.י" width="76" height="40"></a>
+<a class="brand" href="../"><span class="logo" role="img" aria-label="ר.א.י"></span></a>
 <nav class="nav" id="nav" aria-label="ניווט ראשי"><ul>
 <li><a href="../">דף הבית</a></li>
 <li><button type="button" class="nav-parent" aria-expanded="false">מבנים טרומיים<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><ul class="subnav"><li><a href="../מבנים-טרומיים/מרחבים-מוגנים/">מרחבים מוגנים</a></li><li><a href="../מבנים-טרומיים/חדרי-טרנספורמציה/">ייצור חדרי שנאים (חדרי טרפו)</a></li><li><a href="../מבנים-טרומיים/מבנים-מרחביים-יבילים/">מבנים מרחביים יבילים</a><ul><li><a href="../מבנים-טרומיים/מבנים-מרחביים-יבילים/רשות-הנמלים/">רשות הנמלים</a></li><li><a href="../מבנים-טרומיים/מבנים-מרחביים-יבילים/מבני-חלוקת-דואר/">מבני חלוקת דואר</a></li><li><a href="../מבנים-טרומיים/מבנים-מרחביים-יבילים/מבנים-לחברת-מקורות/">מבנים לחברת מקורות</a></li><li><a href="../מבנים-טרומיים/מבנים-מרחביים-יבילים/מבנה-מעבר-משטרת-ישראל/">מבנה מעבר משטרת ישראל</a></li></ul></li><li><a href="../מבנים-טרומיים/חדרי-נשק/">חדרי נשק</a></li><li><a href="../מבנים-טרומיים/חדרי-שומר/">חדרי שומר</a></li></ul></li>
@@ -27,6 +29,7 @@
 <li><a href="../פרויקטים/">פרויקטים</a></li>
 <li><button type="button" class="nav-parent is-active" aria-expanded="false">אודות<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><ul class="subnav"><li><a href="../אודות/" aria-current="page">אודות ר.א.י (תעשיה לתבניות מתקדמות) בע&quot;מ</a></li><li><a href="../אישורים-והסמכות/">אישורים והסמכות</a></li><li><a href="../הצהרת-מדיניות-האיכות/">הצהרת מדיניות האיכות</a></li></ul></li>
 <li><a href="../צור-קשר/">צור קשר</a></li>
+<li><button type="button" class="nav-parent" aria-expanded="false">עיצובים<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><ul class="subnav designs"><li class="designs-note">תצוגה מקדימה של עיצובים חלופיים</li><li><a href="?design=classic" data-design="classic"><span class="swatch" style="--a:#dd313f;--b:#111820"></span>קלאסי (נוכחי)</a></li><li><a href="?design=graphite" data-design="graphite"><span class="swatch" style="--a:#e5404d;--b:#0f1419"></span>גרפיט – כהה</a></li><li><a href="?design=concrete" data-design="concrete"><span class="swatch" style="--a:#c8392b;--b:#d6d2ca"></span>בטון – תעשייתי</a></li><li><a href="?design=blueprint" data-design="blueprint"><span class="swatch" style="--a:#1f6fd0;--b:#0f2742"></span>שרטוט – כחול</a></li><li><a href="?design=safety" data-design="safety"><span class="swatch" style="--a:#f7b500;--b:#16181b"></span>צהוב בטיחות</a></li><li><a href="?design=editorial" data-design="editorial"><span class="swatch" style="--a:#8f1d2c;--b:#f2ecdf"></span>קלאסי עם סריף</a></li><li><a href="?design=galilee" data-design="galilee"><span class="swatch" style="--a:#2f7a55;--b:#f1eee3"></span>גליל – ירוק</a></li><li><a href="?design=steel" data-design="steel"><span class="swatch" style="--a:#0e8f87;--b:#1c2733"></span>פלדה – טורקיז</a></li><li><a href="?design=soft" data-design="soft"><span class="swatch" style="--a:#4f46e5;--b:#f3f4fc"></span>רך – מעוגל</a></li></ul></li>
 </ul></nav>
 <div class="header-actions">
 <a class="lang-switch" href="../en/about/" lang="en" hreflang="en" aria-label="English" title="English">EN</a>
@@ -81,7 +84,7 @@
 
 <footer class="site-footer"><div class="wrap">
 <div class="footer-grid">
-<div><img src="../assets/img/logo.svg" alt="ר.א.י" width="84" height="44" loading="lazy">
+<div><span class="logo" role="img" aria-label="ר.א.י"></span>
 <p>ר.א.י (תעשיה לתבניות מתקדמות) בע&quot;מ<br>מבנים ואלמנטים טרומיים יבילים ועבודות בניה.</p></div>
 <div><h2>תחומי פעילות</h2><ul><li><a href="../מבנים-טרומיים/מרחבים-מוגנים/">מרחבים מוגנים</a></li><li><a href="../מבנים-טרומיים/חדרי-טרנספורמציה/">ייצור חדרי שנאים (חדרי טרפו)</a></li><li><a href="../מבנים-טרומיים/מבנים-מרחביים-יבילים/">מבנים מרחביים יבילים</a></li><li><a href="../מבנים-טרומיים/חדרי-נשק/">חדרי נשק</a></li><li><a href="../מבנים-טרומיים/חדרי-שומר/">חדרי שומר</a></li><li><a href="../בניה-קלה/">בניה קלה</a></li></ul></div>
 <div><h2>החברה</h2><ul><li><a href="../אודות/">אודות ר.א.י</a></li><li><a href="../פרויקטים/">פרויקטים</a></li><li><a href="../אישורים-והסמכות/">אישורים והסמכות</a></li><li><a href="../הצהרת-מדיניות-האיכות/">הצהרת מדיניות האיכות</a></li><li><a href="../צור-קשר/">צור קשר</a></li></ul></div>

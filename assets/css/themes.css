@@ -1,0 +1,167 @@
+/* Alternative designs for preview.
+   Each block overrides the variables defined in style.css (plus a few shape tweaks).
+   The active design is set as <html data-design="..."> by the "Designs" menu.
+   Once a design is chosen, copy its values into :root in style.css and delete this file. */
+
+@font-face { font-family: "Rubik"; font-weight: 300 900; font-display: swap; src: url("../fonts/rubik-hebrew-wght-normal.woff2") format("woff2"); unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: "Rubik"; font-weight: 300 900; font-display: swap; src: url("../fonts/rubik-latin-wght-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212, U+FEFF, U+FFFD; }
+@font-face { font-family: "Assistant"; font-weight: 200 800; font-display: swap; src: url("../fonts/assistant-hebrew-wght-normal.woff2") format("woff2"); unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: "Assistant"; font-weight: 200 800; font-display: swap; src: url("../fonts/assistant-latin-wght-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212, U+FEFF, U+FFFD; }
+@font-face { font-family: "Frank Ruhl Libre"; font-weight: 300 900; font-display: swap; src: url("../fonts/frank-ruhl-libre-hebrew-wght-normal.woff2") format("woff2"); unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: "Frank Ruhl Libre"; font-weight: 300 900; font-display: swap; src: url("../fonts/frank-ruhl-libre-latin-wght-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212, U+FEFF, U+FFFD; }
+
+/* ============ 1. Graphite – dark ============ */
+[data-design="graphite"] {
+  --ink: #f3f5f7; --ink-soft: #dde2e7; --text: #b9c1ca; --muted: #87919c;
+  --bg: #0f1419; --surface: #141b22; --card: #19212a; --line: #27323d; --line-strong: #3a4754;
+  --dark: #0a0e12; --footer-bg: #07090c;
+  --brand: #e5404d; --brand-dark: #c9303d; --accent-text: #ff6b76;
+  --header-bg: rgba(15, 20, 25, .92);
+  --hero-rgb: 10, 14, 18;
+  --shadow: 0 10px 28px rgba(0, 0, 0, .4);
+}
+[data-design="graphite"] .btn-outline:hover { border-color: var(--ink-soft); }
+
+/* ============ 2. Concrete – square, industrial, warm grey ============ */
+[data-design="concrete"] {
+  --ink: #1c1b19; --ink-soft: #33312e; --text: #46433f; --muted: #76726c;
+  --bg: #f4f2ee; --surface: #e9e6e0; --card: #fbfaf8; --line: #d6d2ca; --line-strong: #1c1b19;
+  --dark: #1c1b19; --footer-bg: #131210;
+  --brand: #c8392b; --brand-dark: #a82d21;
+  --header-bg: rgba(244, 242, 238, .95);
+  --hero-rgb: 28, 27, 25; --hero-accent: #ff9a8c;
+  --radius: 0px; --btn-radius: 0px; --field-radius: 0px;
+  --font-body: "Rubik", system-ui, Arial, sans-serif;
+  --head-weight: 800; --h1-weight: 900; --head-spacing: -0.02em;
+  --shadow: none;
+}
+[data-design="concrete"] .card { border-width: 0; border-top: 4px solid var(--ink); }
+[data-design="concrete"] .card:hover { border-top-color: var(--brand); transform: none; }
+[data-design="concrete"] .eyebrow { display: inline-flex; align-items: center; gap: 10px; text-transform: uppercase; }
+[data-design="concrete"] .eyebrow::before { content: ""; width: 28px; height: 3px; background: currentColor; }
+[data-design="concrete"] .site-header { border-bottom: 3px solid var(--ink); }
+[data-design="concrete"] .pills a { border-radius: 0; }
+[data-design="concrete"] .btn { text-transform: uppercase; letter-spacing: .03em; font-weight: 700; }
+
+/* ============ 3. Blueprint – navy and blue with drawing grid ============ */
+[data-design="blueprint"] {
+  --ink: #0f2742; --ink-soft: #24405e; --text: #3b5169; --muted: #677b90;
+  --bg: #ffffff; --surface: #f2f6fb; --line: #dbe4ee; --line-strong: #b9c9db;
+  --dark: #0f2742; --footer-bg: #0a1c30;
+  --brand: #1f6fd0; --brand-dark: #185bae; --logo: #0f2742; --footer-logo: #ffffff;
+  --hero-rgb: 12, 34, 60; --hero-accent: #8ec5ff;
+  --pagehead-bg: #0f2742; --pagehead-ink: #ffffff; --pagehead-text: rgba(255, 255, 255, .82); --pagehead-muted: rgba(255, 255, 255, .6);
+  --radius: 6px; --btn-radius: 4px; --field-radius: 4px;
+  --font-body: "Rubik", system-ui, Arial, sans-serif;
+  --head-weight: 600; --h1-weight: 700;
+}
+[data-design="blueprint"] .page-head,
+[data-design="blueprint"] .cta {
+  background-image: linear-gradient(rgba(255, 255, 255, .06) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+[data-design="blueprint"] .section-alt {
+  background-image: linear-gradient(rgba(15, 39, 66, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 39, 66, .045) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+[data-design="blueprint"] .eyebrow { text-transform: uppercase; letter-spacing: .06em; padding-inline-start: 10px; border-inline-start: 3px solid currentColor; line-height: 1.2; }
+
+/* ============ 4. Safety – black and construction yellow ============ */
+[data-design="safety"] {
+  --ink: #16181b; --ink-soft: #2b2f34; --text: #40464d; --muted: #6c737b;
+  --bg: #ffffff; --surface: #f4f4f2; --line: #e2e2de; --line-strong: #16181b;
+  --dark: #16181b; --footer-bg: #0d0e10;
+  --brand: #f7b500; --brand-dark: #e0a300; --on-brand: #16181b; --accent-text: #9a6b00; --logo: #f7b500;
+  --header-bg: rgba(22, 24, 27, .96); --header-ink: #f1f1ee; --header-line: rgba(255, 255, 255, .22);
+  --hero-rgb: 22, 24, 27; --hero-accent: #f7b500;
+  --pagehead-bg: #16181b; --pagehead-ink: #ffffff; --pagehead-text: rgba(255, 255, 255, .82); --pagehead-muted: rgba(255, 255, 255, .6);
+  --radius: 4px; --btn-radius: 4px; --field-radius: 4px;
+  --font-body: "Rubik", system-ui, Arial, sans-serif;
+  --head-weight: 800; --h1-weight: 900;
+}
+[data-design="safety"] .site-header { border-bottom: 0; }
+[data-design="safety"] .site-header::after {
+  content: ""; position: absolute; inset-inline: 0; top: 100%; height: 6px;
+  background: repeating-linear-gradient(-45deg, #f7b500 0 14px, #16181b 14px 28px);
+}
+[data-design="safety"] .lang-switch:hover { color: #f7b500; border-color: #f7b500; }
+@media (min-width: 1101px) {
+  [data-design="safety"] .nav > ul > li > a:hover, [data-design="safety"] .nav .nav-parent:hover,
+  [data-design="safety"] .nav > ul > li > [aria-current="page"], [data-design="safety"] .nav .is-active { color: #f7b500; }
+}
+[data-design="safety"] .card:hover { border-color: var(--brand); }
+
+/* ============ 5. Editorial – serif headings on cream ============ */
+[data-design="editorial"] {
+  --ink: #23201c; --ink-soft: #3a352f; --text: #4a443d; --muted: #7c746a;
+  --bg: #faf6ee; --surface: #f2ecdf; --card: #fffdf8; --line: #e3dccd; --line-strong: #c9bfab;
+  --dark: #23201c; --footer-bg: #1a1815;
+  --brand: #8f1d2c; --brand-dark: #741624;
+  --header-bg: rgba(250, 246, 238, .95);
+  --hero-rgb: 35, 32, 28; --hero-accent: #f0c9a0;
+  --radius: 2px; --btn-radius: 2px; --field-radius: 2px;
+  --font-body: "Assistant", system-ui, Arial, sans-serif;
+  --font-head: "Frank Ruhl Libre", Georgia, "Times New Roman", serif;
+  --head-weight: 600; --h1-weight: 700; --head-spacing: 0;
+  --shadow: none;
+}
+[data-design="editorial"] body { font-size: 18px; }
+[data-design="editorial"] .card { background: none; border: 0; border-radius: 0; }
+[data-design="editorial"] .card:hover { transform: none; }
+[data-design="editorial"] .card-body { padding: 14px 0; border-bottom: 1px solid var(--line-strong); }
+[data-design="editorial"] .card-plain .card-body { padding: 18px 0; border-top: 1px solid var(--line-strong); }
+[data-design="editorial"] .eyebrow { font-weight: 600; letter-spacing: .12em; text-transform: uppercase; font-size: .8rem; }
+[data-design="editorial"] .page-head { background: none; }
+[data-design="editorial"] .hero .wrap { padding-block: clamp(96px, 15vw, 190px); }
+
+/* ============ 6. Galilee – green and sand ============ */
+[data-design="galilee"] {
+  --ink: #1d2b24; --ink-soft: #2f4238; --text: #42524a; --muted: #6d7b73;
+  --bg: #fbfaf5; --surface: #f1eee3; --card: #ffffff; --line: #e1ddcf; --line-strong: #c5c0ae;
+  --dark: #1f3a2d; --footer-bg: #162a21;
+  --brand: #2f7a55; --brand-dark: #256446; --logo: #2f7a55; --footer-logo: #e6dfc8;
+  --header-bg: rgba(251, 250, 245, .95);
+  --hero-rgb: 22, 42, 33; --hero-accent: #d9e8a8;
+  --radius: 16px; --btn-radius: 12px; --field-radius: 10px;
+  --font-body: "Assistant", system-ui, Arial, sans-serif;
+  --head-weight: 700; --h1-weight: 800;
+}
+[data-design="galilee"] body { font-size: 18px; }
+
+/* ============ 7. Steel – dark header, slate and teal ============ */
+[data-design="steel"] {
+  --ink: #1c2733; --ink-soft: #2f3d4c; --text: #445463; --muted: #6b7a89;
+  --bg: #f7f9fb; --surface: #eaeff3; --card: #ffffff; --line: #d8e0e7; --line-strong: #b4c1cd;
+  --dark: #1c2733; --footer-bg: #141c25;
+  --brand: #0e8f87; --brand-dark: #0b766f; --logo: #ffffff; --footer-logo: #ffffff;
+  --header-bg: rgba(28, 39, 51, .96); --header-ink: #e6ecf1; --header-line: rgba(255, 255, 255, .2);
+  --hero-rgb: 20, 28, 37; --hero-accent: #6fe0d8;
+  --radius: 6px; --btn-radius: 6px; --field-radius: 6px;
+  --head-weight: 600; --h1-weight: 700;
+}
+[data-design="steel"] .lang-switch:hover { color: #6fe0d8; border-color: #6fe0d8; }
+@media (min-width: 1101px) {
+  [data-design="steel"] .nav > ul > li > a:hover, [data-design="steel"] .nav .nav-parent:hover,
+  [data-design="steel"] .nav > ul > li > [aria-current="page"], [data-design="steel"] .nav .is-active { color: #6fe0d8; }
+}
+[data-design="steel"] .card { border-width: 0; box-shadow: 0 1px 3px rgba(28, 39, 51, .12); }
+[data-design="steel"] .card:hover { box-shadow: 0 10px 28px rgba(28, 39, 51, .16); }
+[data-design="steel"] .creds { background: var(--card); }
+
+/* ============ 8. Soft – rounded, light, indigo ============ */
+[data-design="soft"] {
+  --ink: #1e2140; --ink-soft: #33375c; --text: #4a4e6d; --muted: #777b98;
+  --bg: #ffffff; --surface: #f3f4fc; --card: #ffffff; --line: #e4e6f3; --line-strong: #c9cdea;
+  --dark: #23265a; --footer-bg: #191b42;
+  --brand: #4f46e5; --brand-dark: #4038c7; --logo: #4f46e5; --footer-logo: #ffffff;
+  --hero-rgb: 30, 33, 80; --hero-accent: #c3c6ff;
+  --radius: 22px; --btn-radius: 999px; --field-radius: 14px;
+  --font-body: "Rubik", system-ui, Arial, sans-serif;
+  --head-weight: 600; --h1-weight: 700;
+  --shadow: 0 18px 40px rgba(79, 70, 229, .14);
+}
+[data-design="soft"] .card { border-color: transparent; box-shadow: 0 2px 12px rgba(30, 33, 64, .07); }
+[data-design="soft"] .hero { margin: 12px; border-radius: 28px; }
+[data-design="soft"] .eyebrow { display: inline-block; padding: 4px 12px; border-radius: 999px; background: color-mix(in srgb, var(--brand) 10%, transparent); letter-spacing: 0; }
+[data-design="soft"] .hero .eyebrow { background: rgba(255, 255, 255, .14); }
+[data-design="soft"] .menu-toggle, [data-design="soft"] .lang-switch { border-radius: 14px; }

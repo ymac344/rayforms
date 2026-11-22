@@ -65,6 +65,20 @@ CLIENTS = [
     ('mekorot', 'מקורות', 'Mekorot'),
 ]
 
+# Alternative designs offered in the "Designs" menu: (id, Hebrew name, English name, swatch colours).
+# The look of each is defined in assets/css/themes.css.
+DESIGNS = [
+    ('classic', 'קלאסי (נוכחי)', 'Classic (current)', '#dd313f', '#111820'),
+    ('graphite', 'גרפיט – כהה', 'Graphite – dark', '#e5404d', '#0f1419'),
+    ('concrete', 'בטון – תעשייתי', 'Concrete – industrial', '#c8392b', '#d6d2ca'),
+    ('blueprint', 'שרטוט – כחול', 'Blueprint – blue', '#1f6fd0', '#0f2742'),
+    ('safety', 'צהוב בטיחות', 'Safety yellow', '#f7b500', '#16181b'),
+    ('editorial', 'קלאסי עם סריף', 'Editorial – serif', '#8f1d2c', '#f2ecdf'),
+    ('galilee', 'גליל – ירוק', 'Galilee – green', '#2f7a55', '#f1eee3'),
+    ('steel', 'פלדה – טורקיז', 'Steel – teal', '#0e8f87', '#1c2733'),
+    ('soft', 'רך – מעוגל', 'Soft – rounded', '#4f46e5', '#f3f4fc'),
+]
+
 # ---------------------------------------------------------------- text
 T = {
     'he': dict(
@@ -73,7 +87,7 @@ T = {
         address='הצורף 1, נוף-הגליל', phone_office='04-6020505', phone_sales='050-4728956',
         skip='דלג לתוכן', home='דף הבית', nav_label='ניווט ראשי', menu='תפריט', crumbs_label='מיקום באתר',
         brand_home='ר.א.י – דף הבית', call='התקשרו',
-        nav_precast='מבנים טרומיים', nav_about='אודות', about_short='אודות ר.א.י',
+        nav_precast='מבנים טרומיים', nav_about='אודות', nav_designs='עיצובים', designs_note='תצוגה מקדימה של עיצובים חלופיים', about_short='אודות ר.א.י',
         footer_tagline='מבנים ואלמנטים טרומיים יבילים ועבודות בניה.',
         footer_activity='תחומי פעילות', footer_company='החברה', rights='כל הזכויות שמורות © 2026',
         office='משרד', sales='מכירות', email='אימייל', address_label='כתובת',
@@ -121,7 +135,7 @@ T = {
         address='HaTsoref St 1, Nof HaGalil, Israel', phone_office='+972-4-602-0505', phone_sales='+972-50-472-8956',
         skip='Skip to content', home='Home', nav_label='Main navigation', menu='Menu', crumbs_label='Breadcrumb',
         brand_home='R.A.Y. – Home', call='Call',
-        nav_precast='Precast Structures', nav_about='About', about_short='About R.A.Y.',
+        nav_precast='Precast Structures', nav_about='About', nav_designs='Designs', designs_note='Preview of alternative designs', about_short='About R.A.Y.',
         footer_tagline='Portable precast structures and elements, and construction works.',
         footer_activity='What we do', footer_company='Company', rights='All rights reserved © 2026',
         office='Office', sales='Sales', email='Email', address_label='Address',
@@ -433,7 +447,25 @@ def nav(c):
 <li>{link('projects')}</li>
 {group(t['nav_about'], ['about', 'certs', 'quality'])}
 <li>{link('contact')}</li>
+{designs_menu(c)}
 </ul></nav>'''
+
+
+def designs_menu(c):
+    """Temporary menu for previewing alternative designs (see themes.css)."""
+    t = c.t
+    idx = 1 + LANGS.index(c.lang)
+    items = ''.join(
+        f'<li><a href="?design={d[0]}" data-design="{d[0]}"><span class="swatch" style="--a:{d[3]};--b:{d[4]}"></span>{d[idx]}</a></li>'
+        for d in DESIGNS)
+    return (f'<li><button type="button" class="nav-parent" aria-expanded="false">{t["nav_designs"]}{icon("chevron")}</button>'
+            f'<ul class="subnav designs"><li class="designs-note">{t["designs_note"]}</li>{items}</ul></li>')
+
+
+# Applies the chosen design before the page paints (from ?design=... or the last choice).
+DESIGN_SCRIPT = ("<script>(function(){try{var m=location.search.match(/[?&]design=([a-z]+)/),"
+                 "d=m?m[1]:localStorage.getItem('design');if(m)localStorage.setItem('design',d);"
+                 "if(d&&d!=='classic')document.documentElement.setAttribute('data-design',d)}catch(e){}})();</script>")
 
 
 def layout(c, description, main, cta=True):
@@ -466,11 +498,13 @@ def layout(c, description, main, cta=True):
 {alternates}<link rel="icon" href="{c.asset('img/favicon.svg')}" type="image/svg+xml">
 <link rel="preload" href="{c.asset('fonts/heebo-' + ('hebrew' if c.lang == 'he' else 'latin') + '.woff2')}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{c.asset('css/style.css')}">
+<link rel="stylesheet" href="{c.asset('css/themes.css')}">
+{DESIGN_SCRIPT}
 </head>
 <body>
 <a class="skip" href="#content">{t['skip']}</a>
 <header class="site-header"><div class="wrap">
-<a class="brand" href="{c.url('home')}" aria-label="{t['brand_home']}"><img src="{c.asset('img/logo.svg')}" alt="{t['brand']}" width="76" height="40"></a>
+<a class="brand" href="{c.url('home')}"><span class="logo" role="img" aria-label="{t['brand']}"></span></a>
 {nav(c)}
 <div class="header-actions">
 <a class="lang-switch" href="{c.url(c.key, other)}" lang="{other}" hreflang="{other}" aria-label="{t['other_name']}" title="{t['other_name']}">{t['other_label']}</a>
@@ -484,7 +518,7 @@ def layout(c, description, main, cta=True):
 {cta_html}
 <footer class="site-footer"><div class="wrap">
 <div class="footer-grid">
-<div><img src="{c.asset('img/logo.svg')}" alt="{t['brand']}" width="84" height="44" loading="lazy">
+<div><span class="logo" role="img" aria-label="{t['brand']}"></span>
 <p>{escape(t['company'])}<br>{t['footer_tagline']}</p></div>
 <div><h2>{t['footer_activity']}</h2><ul>{precast}</ul></div>
 <div><h2>{t['footer_company']}</h2><ul>{company}</ul></div>
